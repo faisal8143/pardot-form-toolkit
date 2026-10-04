@@ -1,0 +1,39 @@
+name: Bug report
+description: Something in the toolkit doesn't work on your form
+labels: [bug]
+body:
+  - type: dropdown
+    id: file
+    attributes:
+      label: Which file?
+      options:
+        - pardot-checkbox.css
+        - pardot-radio.css
+        - pardot-error-states.css
+        - sticky-footer.css
+        - field-attributes.js
+        - select-placeholder.js
+        - label-to-placeholder.js
+        - utm-hidden-fields.js
+        - submit-guard.js
+        - iframe-resize-child.js / iframe-embed-parent.js
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: markup
+    attributes:
+      label: Form markup
+      description: Right-click the form → Inspect → copy the `<form>` element. Remove any personal or client data.
+      render: html
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: e.g. Chrome 129 on Windows

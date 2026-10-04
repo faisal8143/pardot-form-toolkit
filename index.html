@@ -22,6 +22,14 @@
     form.form#pardot-form select.pft-is-placeholder { color: #999; }
     form.form#pardot-form .value > span { display: block; }
     form.form#pardot-form p.error.no-label { margin: -12px 0 16px; }
+    .submit input:disabled { opacity: .7; cursor: progress; }
+    .panel { margin-top: 16px; background: #fff; border: 1px dashed #c9ced6; border-radius: 8px; padding: 16px; font-size: 13px; color: #444; }
+    .panel h2 { margin: 0 0 8px; font-size: 14px; }
+    .panel code { background: #f1f3f5; padding: 1px 4px; border-radius: 3px; }
+    .panel table { border-collapse: collapse; width: 100%; }
+    .panel td { padding: 3px 6px; border-bottom: 1px solid #eee; font-family: ui-monospace, Menlo, Consolas, monospace; word-break: break-all; }
+    .panel a { color: #1f7a7c; }
+    #demo-result { display: none; margin-top: 12px; padding: 10px 12px; background: #e9f8f8; border: 1px solid #b7e6e7; border-radius: 4px; color: #1f5f60; }
     .submit input { background: #3eb9bc; color: #fff; border: 0; border-radius: 4px; padding: 12px 22px; font: inherit; font-weight: 600; cursor: pointer; }
     .footer { color: #777; font-size: 13px; }
     .footer a { color: inherit; }
@@ -30,13 +38,13 @@
 <body>
   <header>
     <h1>Pardot Form Toolkit</h1>
-    <p>Demo of the CSS and JS snippets on Account Engagement (Pardot) style form markup. The email field is shown in its error state.</p>
+    <p>Demo of the CSS and JS snippets on Account Engagement (Pardot) style form markup. The email field is shown in its error state — fix it and submit to see the double-submit guard.</p>
   </header>
 
   <main>
     <div class="card">
       <!-- Markup mirrors what Account Engagement renders for a standard form -->
-      <form accept-charset="UTF-8" method="post" action="#" class="form" id="pardot-form" onsubmit="return false;">
+      <form accept-charset="UTF-8" method="post" action="#" class="form" id="pardot-form">
         <p class="errors">Please correct the errors below:</p>
 
         <p class="form-field first_name pd-text required">
@@ -88,8 +96,22 @@
           </span>
         </p>
 
+        <!-- Hidden fields filled by js/utm-hidden-fields.js -->
+        <p class="form-field utm_source pd-hidden hidden"><input type="hidden" name="utm_source" id="utm_source" value=""></p>
+        <p class="form-field utm_medium pd-hidden hidden"><input type="hidden" name="utm_medium" id="utm_medium" value=""></p>
+        <p class="form-field utm_campaign pd-hidden hidden"><input type="hidden" name="utm_campaign" id="utm_campaign" value=""></p>
+        <p class="form-field gclid pd-hidden hidden"><input type="hidden" name="gclid" id="gclid" value=""></p>
+
         <p class="submit"><input type="submit" value="Submit"></p>
+        <p id="demo-result" role="status">Submitted — the button stayed disabled, so a double-click can't create a duplicate prospect. (Demo only: nothing is sent.)</p>
       </form>
+    </div>
+
+    <div class="panel">
+      <h2>Captured hidden fields</h2>
+      <p style="margin:0 0 8px">Open <a href="?utm_source=linkedin&amp;utm_medium=social&amp;utm_campaign=launch&amp;gclid=demo123">this page with UTM parameters</a> and they're copied into the form's hidden fields:</p>
+      <table id="utm-table"><tbody></tbody></table>
+      <p style="margin:10px 0 0">Embedding forms in an iframe? See the <a href="examples/embed.html?utm_source=newsletter&amp;utm_campaign=october">auto-resizing iframe demo</a>.</p>
     </div>
   </main>
 
@@ -99,5 +121,21 @@
 
   <script src="js/field-attributes.js"></script>
   <script src="js/select-placeholder.js"></script>
+  <script src="js/utm-hidden-fields.js"></script>
+  <script src="js/submit-guard.js"></script>
+  <script>
+    // Demo only: show captured values and stop the real POST
+    (function () {
+      var rows = ['utm_source', 'utm_medium', 'utm_campaign', 'gclid'].map(function (name) {
+        var v = document.getElementById(name).value;
+        return '<tr><td>' + name + '</td><td>' + (v ? v.replace(/[<>&"]/g, '') : '<span style="color:#aaa">(empty)</span>') + '</td></tr>';
+      });
+      document.querySelector('#utm-table tbody').innerHTML = rows.join('');
+      document.getElementById('pardot-form').addEventListener('submit', function (e) {
+        e.preventDefault(); // runs after submit-guard.js, so the guard still locks the button
+        document.getElementById('demo-result').style.display = 'block';
+      });
+    })();
+  </script>
 </body>
 </html>

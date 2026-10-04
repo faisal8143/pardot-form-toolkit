@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Embedded Pardot form (example)</title>
+  <!-- In Account Engagement this file is your form's Layout Template -->
+  <link rel="stylesheet" href="../css/pardot-checkbox.css">
+  <link rel="stylesheet" href="../css/pardot-error-states.css">
+  <style>
+    body { margin: 0; padding: 16px; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #222; background: #fff; }
+    form.form#pardot-form p.form-field { margin: 0 0 14px; }
+    form.form#pardot-form .field-label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+    :where(form.form#pardot-form) :where(input[type=text], input[type=email], textarea) {
+      width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; border: 1px solid #ccc; border-radius: 4px;
+    }
+    .submit input { background: #3eb9bc; color: #fff; border: 0; border-radius: 4px; padding: 12px 22px; font: inherit; font-weight: 600; cursor: pointer; }
+    #extra { display: none; }
+    .toggle { font-size: 13px; margin: 0 0 14px; }
+    .toggle button { font: inherit; background: none; border: 0; color: #1f7a7c; text-decoration: underline; cursor: pointer; padding: 0; }
+  </style>
+</head>
+<body>
+  <form accept-charset="UTF-8" method="post" action="#" class="form" id="pardot-form">
+    <p class="form-field email pd-text required">
+      <label class="field-label" for="email">Work email</label>
+      <input type="email" name="email" id="email" required>
+    </p>
+
+    <p class="toggle"><button type="button" id="grow">Show more fields</button> — the iframe on the host page resizes to fit.</p>
+
+    <div id="extra">
+      <p class="form-field company pd-text">
+        <label class="field-label" for="company">Company</label>
+        <input type="text" name="company" id="company">
+      </p>
+      <p class="form-field comments pd-textarea">
+        <label class="field-label" for="comments">How can we help?</label>
+        <textarea name="comments" id="comments" rows="5"></textarea>
+      </p>
+    </div>
+
+    <p class="form-field utm_source pd-hidden hidden"><input type="hidden" name="utm_source" id="utm_source"></p>
+    <p class="form-field utm_campaign pd-hidden hidden"><input type="hidden" name="utm_campaign" id="utm_campaign"></p>
+
+    <p class="submit"><input type="submit" value="Submit"></p>
+  </form>
+  <p style="font-size:13px;color:#666">Hidden fields received: <span id="received"></span></p>
+
+  <script src="../js/utm-hidden-fields.js"></script>
+  <script src="../js/submit-guard.js"></script>
+  <script src="../js/iframe-resize-child.js"></script>
+  <script>
+    // Demo only
+    document.getElementById('grow').addEventListener('click', function () {
+      var extra = document.getElementById('extra');
+      var open = extra.style.display === 'block';
+      extra.style.display = open ? 'none' : 'block';
+      this.textContent = open ? 'Show more fields' : 'Hide extra fields';
+    });
+    document.getElementById('received').textContent =
+      'utm_source=' + (document.getElementById('utm_source').value || '(empty)') +
+      ', utm_campaign=' + (document.getElementById('utm_campaign').value || '(empty)');
+    document.getElementById('pardot-form').addEventListener('submit', function (e) { e.preventDefault(); });
+  </script>
+</body>
+</html>

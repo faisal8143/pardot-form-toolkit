@@ -1,0 +1,19 @@
+name: Snippet request
+description: Suggest a fix for a common Account Engagement / Marketing Cloud form problem
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's the problem?
+      description: What can't you do with the standard Pardot form editor or CloudPages?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How would you like it to work?
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Current workaround (if any)
