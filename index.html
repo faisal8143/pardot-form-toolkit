@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pardot Form Toolkit — Demo</title>
+  <link rel="stylesheet" href="css/pardot-checkbox.css">
+  <link rel="stylesheet" href="css/pardot-radio.css">
+  <link rel="stylesheet" href="css/pardot-error-states.css">
+  <link rel="stylesheet" href="css/sticky-footer.css">
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #222; background: #f6f7f9; }
+    header, main, .footer { width: 100%; max-width: 640px; margin: 0 auto; padding: 24px 16px; }
+    header h1 { margin: 0 0 6px; font-size: 24px; }
+    header p { margin: 0; color: #555; }
+    .card { background: #fff; border: 1px solid #e3e5e8; border-radius: 8px; padding: 24px; }
+    form.form#pardot-form p.form-field { margin: 0 0 16px; }
+    form.form#pardot-form .field-label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+    :where(form.form#pardot-form) :where(input[type=text], input[type=email], input[type=tel], select) {
+      width: 100%; padding: 10px 12px; font: inherit; border: 1px solid #ccc; border-radius: 4px; background: #fff;
+    }
+    form.form#pardot-form select.pft-is-placeholder { color: #999; }
+    form.form#pardot-form .value > span { display: block; }
+    form.form#pardot-form p.error.no-label { margin: -12px 0 16px; }
+    .submit input { background: #3eb9bc; color: #fff; border: 0; border-radius: 4px; padding: 12px 22px; font: inherit; font-weight: 600; cursor: pointer; }
+    .footer { color: #777; font-size: 13px; }
+    .footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pardot Form Toolkit</h1>
+    <p>Demo of the CSS and JS snippets on Account Engagement (Pardot) style form markup. The email field is shown in its error state.</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <!-- Markup mirrors what Account Engagement renders for a standard form -->
+      <form accept-charset="UTF-8" method="post" action="#" class="form" id="pardot-form" onsubmit="return false;">
+        <p class="errors">Please correct the errors below:</p>
+
+        <p class="form-field first_name pd-text required">
+          <label class="field-label" for="first_name">First Name</label>
+          <input type="text" name="first_name" id="first_name" value="">
+        </p>
+
+        <p class="form-field last_name pd-text required">
+          <label class="field-label" for="last_name">Last Name</label>
+          <input type="text" name="last_name" id="last_name" value="">
+        </p>
+
+        <p class="form-field email pd-text required error">
+          <label class="field-label" for="email">Email</label>
+          <input type="text" name="email" id="email" value="not-an-email">
+        </p>
+        <p class="error no-label">Please enter a valid email address.</p>
+
+        <p class="form-field phone pd-text">
+          <label class="field-label" for="phone">Phone</label>
+          <input type="text" name="phone" id="phone" value="">
+        </p>
+
+        <p class="form-field country pd-select required">
+          <label class="field-label" for="country">Country</label>
+          <select name="country" id="country" data-placeholder="Select your country">
+            <option value=""></option>
+            <option value="AU">Australia</option>
+            <option value="MY">Malaysia</option>
+            <option value="PK">Pakistan</option>
+            <option value="SG">Singapore</option>
+          </select>
+        </p>
+
+        <p class="form-field interest pd-radio">
+          <label class="field-label">I'm interested in</label>
+          <span class="value">
+            <span><input type="radio" name="interest" id="interest_0" value="demo" checked><label class="inline" for="interest_0">Booking a demo</label></span>
+            <span><input type="radio" name="interest" id="interest_1" value="pricing"><label class="inline" for="interest_1">Pricing information</label></span>
+            <span><input type="radio" name="interest" id="interest_2" value="other"><label class="inline" for="interest_2">Something else</label></span>
+          </span>
+        </p>
+
+        <p class="form-field opt_in pd-checkbox">
+          <label class="field-label">Updates</label>
+          <span class="value">
+            <span><input type="checkbox" name="opt_in" id="opt_in_0" value="yes" checked><label class="inline" for="opt_in_0">Send me product updates</label></span>
+            <span><input type="checkbox" name="newsletter" id="opt_in_1" value="yes"><label class="inline" for="opt_in_1">Subscribe to the monthly newsletter</label></span>
+          </span>
+        </p>
+
+        <p class="submit"><input type="submit" value="Submit"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    MIT licensed · <a href="https://github.com/faisal8143/pardot-form-toolkit">github.com/faisal8143/pardot-form-toolkit</a>
+  </footer>
+
+  <script src="js/field-attributes.js"></script>
+  <script src="js/select-placeholder.js"></script>
+</body>
+</html>

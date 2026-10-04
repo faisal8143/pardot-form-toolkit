@@ -1,0 +1,75 @@
+/*
+ * Pardot Form Toolkit — Validation & error states
+ * Styles the classes Account Engagement (Pardot) adds on failed submit:
+ *   p.errors (summary banner), p.error (field wrapper), span.error.no-label (field message)
+ */
+:root {
+  --pft-error: #9d261d;
+  --pft-error-bg: #ffeeee;
+  --pft-error-banner-bg: #f2dede;
+  --pft-error-banner-border: #ebccd1;
+  --pft-error-banner-text: #b94a48;
+  --pft-focus: #66afe9;
+  --pft-placeholder: #bbbbbb;
+}
+
+/* Invalid fields */
+form.form#pardot-form .error input,
+form.form#pardot-form .error select,
+form.form#pardot-form .error textarea {
+  background-color: var(--pft-error-bg);
+  border-color: var(--pft-error);
+}
+
+form.form#pardot-form .error .field-label {
+  color: var(--pft-error);
+}
+
+/* Placeholder colour */
+form.form#pardot-form ::placeholder {
+  color: var(--pft-placeholder);
+  opacity: 1;
+}
+
+/* Focus state for valid fields */
+form.form#pardot-form p:not(.error) input:focus,
+form.form#pardot-form p:not(.error) select:focus,
+form.form#pardot-form p:not(.error) textarea:focus {
+  border-color: var(--pft-focus);
+  outline: none;
+}
+
+/* Field-level error message */
+form.form#pardot-form p { position: relative; }
+
+form.form#pardot-form span.error.no-label,
+form.form#pardot-form p.error.no-label {
+  display: block;
+  margin: 0;
+  padding: 4px 0 0;
+  color: var(--pft-error);
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.375;
+}
+
+/* Summary banner at the top of the form */
+form.form#pardot-form p.errors {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 20px;
+  padding: 15px;
+  background-color: var(--pft-error-banner-bg);
+  border: 1px solid var(--pft-error-banner-border);
+  border-radius: 0;
+  color: var(--pft-error-banner-text);
+  font-size: 14px;
+}
+
+/* Make sure radio/checkbox groups show their error message */
+form.form#pardot-form p.error.pd-radio,
+form.form#pardot-form p.error.pd-checkbox,
+form.form#pardot-form p.error.pd-radio span.error.no-label,
+form.form#pardot-form p.error.pd-checkbox span.error.no-label {
+  display: block !important;
+}

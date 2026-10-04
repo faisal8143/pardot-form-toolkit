@@ -1,0 +1,68 @@
+/*
+ * Pardot Form Toolkit — Custom radio buttons
+ * Works with Account Engagement (Pardot) form markup: <p class="pd-radio"> … <input type="radio"> <label> …
+ * Pure CSS, no icon font needed.
+ */
+:root {
+  --pft-accent: #56cfd2;
+  --pft-accent-dark: #3eb9bc;
+  --pft-border: #dddddd;
+  --pft-radio-size: 20px;
+}
+
+.pd-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.pd-radio input[type="radio"] + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+/* Outer ring */
+.pd-radio input[type="radio"] + label::before {
+  content: "";
+  flex: 0 0 var(--pft-radio-size);
+  width: var(--pft-radio-size);
+  height: var(--pft-radio-size);
+  box-sizing: border-box;
+  background: #fff;
+  border: 2px solid var(--pft-border);
+  border-radius: 50%;
+  transition: border-color .15s;
+}
+
+/* Inner dot */
+.pd-radio input[type="radio"] + label::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pft-accent);
+  transform: translateY(-50%) scale(0);
+  transition: transform .15s;
+}
+
+.pd-radio input[type="radio"]:checked + label::before {
+  border-color: var(--pft-accent-dark);
+}
+.pd-radio input[type="radio"]:checked + label::after {
+  transform: translateY(-50%) scale(1);
+}
+
+.pd-radio input[type="radio"]:focus-visible + label::before {
+  outline: 2px solid var(--pft-accent-dark);
+  outline-offset: 2px;
+}

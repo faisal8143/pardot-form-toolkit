@@ -1,0 +1,73 @@
+/*
+ * Pardot Form Toolkit — Custom checkboxes
+ * Works with Account Engagement (Pardot) form markup: <p class="pd-checkbox"> … <input type="checkbox"> <label> …
+ * Pure CSS, no icon font needed.
+ */
+:root {
+  --pft-accent: #56cfd2;
+  --pft-accent-dark: #3eb9bc;
+  --pft-border: #dddddd;
+  --pft-box-size: 20px;
+}
+
+/* Visually hide the native checkbox but keep it focusable and accessible */
+.pd-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.pd-checkbox input[type="checkbox"] + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+/* Unchecked box */
+.pd-checkbox input[type="checkbox"] + label::before {
+  content: "";
+  flex: 0 0 var(--pft-box-size);
+  width: var(--pft-box-size);
+  height: var(--pft-box-size);
+  box-sizing: border-box;
+  background: #fff;
+  border: 2px solid var(--pft-border);
+  border-radius: 3px;
+  transition: background-color .15s, border-color .15s;
+}
+
+/* Tick mark */
+.pd-checkbox input[type="checkbox"] + label::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  width: 6px;
+  height: 11px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-60%) rotate(45deg);
+  opacity: 0;
+  transition: opacity .15s;
+}
+
+/* Checked */
+.pd-checkbox input[type="checkbox"]:checked + label::before {
+  background: var(--pft-accent);
+  border-color: var(--pft-accent-dark);
+}
+.pd-checkbox input[type="checkbox"]:checked + label::after {
+  opacity: 1;
+}
+
+/* Keyboard focus */
+.pd-checkbox input[type="checkbox"]:focus-visible + label::before {
+  outline: 2px solid var(--pft-accent-dark);
+  outline-offset: 2px;
+}
