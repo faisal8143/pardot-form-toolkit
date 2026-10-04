@@ -41,9 +41,9 @@ All colours are CSS custom properties (`--pft-accent`, `--pft-error`, …), and 
 In Account Engagement go to **Content → Layout Templates → (your template) → Layout tab** and add the stylesheets inside `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/css/pardot-checkbox.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/css/pardot-radio.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/css/pardot-error-states.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/css/pardot-checkbox.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/css/pardot-radio.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/css/pardot-error-states.css">
 ```
 
 To re-brand, override the variables after the stylesheets:
@@ -59,10 +59,10 @@ To re-brand, override the variables after the stylesheets:
 Open the form → **Look and Feel → Below Form** → switch to HTML source and paste the scripts you need:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/js/field-attributes.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/js/select-placeholder.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/js/utm-hidden-fields.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/js/submit-guard.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/js/field-attributes.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/js/select-placeholder.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/js/utm-hidden-fields.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/js/submit-guard.js"></script>
 ```
 
 - **field-attributes.js:** edit `FIELD_CONFIG` to match your field names (the class Pardot puts on each field's `<p>`, e.g. `first_name`, `email`, `company`).
@@ -88,7 +88,7 @@ Pardot's embed code uses a fixed-height iframe, so errors and thank-you messages
 
 ```html
 <script>window.PFT_PARENT_ORIGIN = 'https://www.your-site.com';</script>
-<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/js/iframe-resize-child.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/js/iframe-resize-child.js"></script>
 ```
 
 **On your website**, add `data-pardot-form` to the iframe and include the parent script:
@@ -96,12 +96,12 @@ Pardot's embed code uses a fixed-height iframe, so errors and thank-you messages
 ```html
 <iframe data-pardot-form src="https://go.your-site.com/l/12345/2026-01-01/abcde"
         width="100%" height="500" style="border:0" title="Contact form"></iframe>
-<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@v1.0.0/js/iframe-embed-parent.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/faisal8143/pardot-form-toolkit@main/js/iframe-embed-parent.js"></script>
 ```
 
 The iframe now fits its content and the page's UTM parameters are passed into the form.
 
-> Tip: for production, copy the files into your own Account Engagement **Files** (or Marketing Cloud Content Builder) and reference them from there instead of a public CDN.
+> Tip: to lock a version, replace `@main` with a release tag such as `@v1.0.0`. For production, copy the files into your own Account Engagement **Files** (or Marketing Cloud Content Builder) and reference them from there instead of a public CDN.
 
 ## Markup it expects
 
